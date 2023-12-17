@@ -1,0 +1,80 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace QuatroBigGuys
+{
+    public partial class Form1 : Form
+    {
+        DataTable table;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int index = dataGridView1.CurrentCell.RowIndex;
+
+            if (index > -1)
+            {
+                txtTitle.Text = table.Rows[index].ItemArray[0].ToString();
+                txtMessage.Text = table.Rows[index].ItemArray[1].ToString();
+            }
+
+            private string GetDebuggerDisplay()
+        {
+            return ToString();
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            txtName.Clear();
+            txtEstimate.Clear();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            int index = dataGridView1.CurrentCell.RowIndex;
+
+            table.Rows[index].Delete();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+        }
+
+        private void txtBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            table.Rows.Add(txtName.Text, txtEstimate.Text);
+
+            txtName.Clear();
+            txtEstimate.Clear();
+        }
+
+        private void Form1_Load_1(object sender, EventArgs e)
+        {
+            table = new DataTable();
+            table.Columns.Add("Name", typeof(String));
+            table.Columns.Add("Estimate", typeof(String));
+
+            dataGridView1.DataSource = table;
+
+            dataGridView1.Columns["Name"].Visible = false;
+            dataGridView1.Columns["Estiamte"].Width = 200;
+        }
+    }
+}
